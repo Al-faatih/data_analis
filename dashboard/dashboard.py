@@ -14,44 +14,67 @@ st.title("📊 E-Commerce Data Analysis Dashboard")
 @st.cache_data
 def load_data():
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    DATA_DIR = os.path.normpath(os.path.join(BASE_DIR, "..", "data", "E-commerce-public-dataset", "E-Commerce Public Dataset"))
+    DATA_DIR = os.path.abspath(os.path.join(BASE_DIR, "..", "data"))
 
-    orders = pd.read_csv(os.path.join(DATA_DIR, "orders_dataset.csv"))
-    order_items = pd.read_csv(os.path.join(DATA_DIR, "order_items_dataset.csv"))
-    products = pd.read_csv(os.path.join(DATA_DIR, "products_dataset.csv"))
-    category = pd.read_csv(os.path.join(DATA_DIR, "product_category_name_translation.csv"))
+    # Debug (hapus kalau sudah aman)
+    st.write("📂 DATA DIR:", DATA_DIR)
+    if not os.path.exists(DATA_DIR):
+        st.error("Folder data tidak ditemukan!")
+        return pd.DataFrame()
 
-    # merge dataset
+    try:
+        orders = pd.read_csv(os.path.join(DATA_DIR, "orders_dataset.csv"))
+        order_items = pd.read_csv(os.path.join(DATA_DIR, "order_items_dataset.csv"))
+        products = pd.read_csv(os.path.join(DATA_DIR, "products_dataset.csv"))
+        category = pd.read_csv(os.path.join(DATA_DIR, "product_category_name_translation.csv"))
+    except FileNotFoundError as e:
+        st.error(f"File tidak ditemukan: {e}")
+        return pd.DataFrame()
+
+    # ===============================
+    # MERGE DATA
+    # ===============================
     df = orders.merge(order_items, on="order_id")
     df = df.merge(products, on="product_id")
     df = df.merge(category, on="product_category_name", how="left")
 
-    # cleaning
+    # ===============================
+    # CLEANING
+    # ===============================
     df['order_purchase_timestamp'] = pd.to_datetime(df['order_purchase_timestamp'], errors='coerce')
-    df = df.dropna(subset=['order_purchase_timestamp', 'price', 'product_category_name_english'])
 
-    # convert datetime
-    df['order_purchase_timestamp'] = pd.to_datetime(df['order_purchase_timestamp'])
+    df = df.dropna(subset=[
+        'order_purchase_timestamp',
+        'price',
+        'product_category_name_english'
+    ])
 
-    # feature engineering
+    # ===============================
+    # FEATURE ENGINEERING
+    # ===============================
     df['month'] = df['order_purchase_timestamp'].dt.to_period('M').astype(str)
 
     return df
 
+
 df = load_data()
+
+# kalau gagal load
+if df.empty:
+    st.stop()
 
 # ===============================
 # SIDEBAR
 # ===============================
 st.sidebar.header("Filter Data")
 
-category = st.sidebar.multiselect(
+selected_category = st.sidebar.multiselect(
     "Pilih Kategori Produk",
     options=df['product_category_name_english'].unique(),
     default=df['product_category_name_english'].unique()
 )
 
-df_filtered = df[df['product_category_name_english'].isin(category)]
+df_filtered = df[df['product_category_name_english'].isin(selected_category)]
 
 # ===============================
 # METRIC
@@ -77,8 +100,9 @@ category_sales = (
 )
 
 fig1, ax1 = plt.subplots()
-category_sales.plot(kind='bar', ax=ax1)
-plt.xticks(rotation=45)
+sns.barplot(x=category_sales.values, y=category_sales.index, ax=ax1)
+ax1.set_xlabel("Revenue")
+ax1.set_ylabel("Category")
 st.pyplot(fig1)
 
 # ===============================
@@ -92,7 +116,7 @@ monthly_orders = (
 )
 
 fig2, ax2 = plt.subplots()
-monthly_orders.plot(ax=ax2)
+monthly_orders.plot(marker='o', ax=ax2)
 plt.xticks(rotation=45)
 st.pyplot(fig2)
 
