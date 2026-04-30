@@ -1,35 +1,48 @@
-# E-Commerce Data Analysis Project
+# 📊 E-Commerce Data Analysis Project
 
-## Deskripsi
+## 📌 Deskripsi
+Proyek ini bertujuan untuk menganalisis data e-commerce guna menemukan insight bisnis dan memberikan rekomendasi strategis.
 
-Proyek ini berfokus pada analisis data e-commerce untuk menggali insight yang bernilai serta menyusun rekomendasi strategi bisnis yang tepat.
+Dataset yang digunakan:
+- E-Commerce Public Dataset
 
-Dataset yang digunakan dalam analisis ini adalah:
+---
 
-E-Commerce Public Dataset
+## 🎯 Business Questions
 
-## Pertanyaan Bisnis
-Kategori produk mana yang mencatat penjualan paling tinggi dan paling rendah?
-Bagaimana pola tren jumlah pesanan setiap bulan selama periode 2017–2018?
+1. Kategori produk apa yang memiliki penjualan tertinggi dan terendah?
+2. Bagaimana tren jumlah order bulanan selama periode 2017–2018?
 
-## Tools & Library
-Python
-Pandas
-Matplotlib
-Seaborn
-Streamlit
+---
 
-## Insight
-Penjualan terkonsentrasi pada beberapa kategori produk tertentu
-Teridentifikasi adanya pola musiman dalam transaksi
-Terjadi peningkatan jumlah pesanan menjelang akhir tahun
+## 🔧 Tools & Library
+- Python
+- Pandas
+- Matplotlib
+- Seaborn
+- Streamlit
 
-## Rencana Tindak Lanjut
-Memaksimalkan performa kategori dengan kontribusi revenue terbesar
-Meningkatkan strategi pada kategori dengan performa rendah
-Mengoptimalkan promosi pada periode dengan permintaan tinggi (peak season)
-Menyusun strategi khusus untuk meningkatkan penjualan di periode sepi (low season)
+---
 
-## Cara Menjalankan Dashboard
-Install dependencies terlebih dahulu:
+## 📊 Insight
+
+- Penjualan didominasi oleh beberapa kategori utama
+- Terdapat pola musiman (seasonality)
+- Order meningkat di akhir tahun
+
+---
+
+## 🚀 Action Plan
+
+- Fokus pada kategori dengan revenue tinggi
+- Optimalkan kategori dengan performa rendah
+- Maksimalkan strategi promosi di peak season
+- Buat campaign khusus saat low season
+
+---
+
+## ▶️ Cara Menjalankan Dashboard
+
+1. Install dependencies:
+```bash
 pip install -r requirements.txt
