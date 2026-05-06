@@ -1,10 +1,16 @@
 # 📊 E-Commerce Data Analysis Project
 
 ## 📌 Deskripsi
+
 Proyek ini bertujuan untuk menganalisis data e-commerce guna menemukan insight bisnis dan memberikan rekomendasi strategis.
 
+---
+
+## 📂 Dataset
+
 Dataset yang digunakan:
-- E-Commerce Public Dataset
+
+E-Commerce Public Dataset by Olist
 
 ---
 
@@ -16,33 +22,94 @@ Dataset yang digunakan:
 ---
 
 ## 🔧 Tools & Library
-- Python
-- Pandas
-- Matplotlib
-- Seaborn
-- Streamlit
+
+* Python
+* Pandas
+* Matplotlib
+* Seaborn
+* Streamlit
 
 ---
 
-## 📊 Insight
+## ▶️ Cara Menjalankan Project
 
-- Penjualan didominasi oleh beberapa kategori utama
-- Terdapat pola musiman (seasonality)
-- Order meningkat di akhir tahun
+### 1. Setup Environment
+
+Pastikan Python sudah terinstall:
+
+```bash
+python --version
+```
+
+Buat virtual environment:
+
+```bash
+python -m venv venv
+```
+
+Aktifkan environment:
+
+**Windows**
+
+```bash
+venv\Scripts\activate
+```
+
+**Mac/Linux**
+
+```bash
+source venv/bin/activate
+```
 
 ---
 
-## 🚀 Action Plan
+### 2. Install Library
 
-- Fokus pada kategori dengan revenue tinggi
-- Optimalkan kategori dengan performa rendah
-- Maksimalkan strategi promosi di peak season
-- Buat campaign khusus saat low season
+Install semua dependencies dari file requirements.txt:
 
----
-
-## ▶️ Cara Menjalankan Dashboard
-
-1. Install dependencies:
 ```bash
 pip install -r requirements.txt
+```
+
+---
+
+### 3. Menjalankan Analisis Data (Notebook)
+
+```bash
+jupyter notebook
+```
+
+Buka file:
+
+```bash
+notebook.ipynb
+```
+
+Klik:
+
+```bash
+Run All
+```
+
+
+---
+
+### 4. Menjalankan Dashboard
+, lalu jalankan
+Masuk ke folder project:
+
+```bash
+streamlit run dashboard/dashboard.py
+```
+
+---
+
+### 5. Akses Dashboard
+
+Setelah berhasil dijalankan, buka di browser:
+
+```bash
+http://localhost:8501
+```
+
+
